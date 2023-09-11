@@ -1,0 +1,75 @@
+{% load socialaccount %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+
+    <!-- Favicons -->
+  <link rel="website icon" type="png" href="/static/images/home.png">
+
+    <!-- signup css link -->
+    <link rel="stylesheet" href="/static/ehome.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <section class="vh-100 " >
+        <div class="container-fluid h-100">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-lg-5 col-xl-8">
+              <div class="full-screen-back card text-black">
+                <div class="card-body">
+                  <div class="row justify-content-center">
+                    <div class="col-md-5 col-lg-5 col-xl-6 order-2 order-lg-1">
+      
+                        <p class="text-center h1 fw-bold mb-3 mx-1 mx-md-4" >Sign up</p>
+      
+                      <form method="POST" novalidate class="shadow p-5 ">
+                        {% csrf_token %}
+
+                        {% for fm in form %}
+                          <div class="form-group mb-3">
+                            {{fm.label_tag}}
+                            {{fm}}
+                            <small class="text-danger">{{fm.errors|striptags}}</small>
+                          </div>
+                        {% endfor %}
+    
+                      
+                        <div class="d-flex justify-content-center ">
+                          <button type="submit" class="btn btn-primary">Register</button>
+                        </div>
+                        <br>
+                        <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}" class="text-danger">Login Now</a></small>  or </div> 
+                        <br>  
+                        <div class="d-flex justify-content-center ">
+                          <a href="{% provider_login_url 'google' %}" class="btn btn-outline-danger"><i class="fa fa-google"></i> |  Signup with Google</a> 
+                        </div>
+                        {% if form.non_field_errors %}
+                            {% for error in form.non_field_errors %}
+                              <p class="alert alert-danger my-3">{{error}}</p>
+                            {% endfor %}
+                        {% endif %}
+      
+                      </form>
+      
+                    </div>
+                    <div class="col-md-8 col-lg-4 col-xl-6 d-flex align-items-center order-1 order-lg-2">
+      
+                      <img src="/static/images/house.png"
+                        class="img-fluid" alt="Sample image">
+      
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+</body>
+</html>
